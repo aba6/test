@@ -17,8 +17,16 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: 部署
-      uses: JamesIves/github-pages-deploy-action@v4
+    - name: 部署到宝塔
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
       with:
-        branch: gh-pages
-        folder: build
+        username: 'root'
+        server: ${{ secrets.REMOTE_HOST }}'
+        ssh_private_key: ${{ secrets.PRIVATE_KEY }}
+        local_path: './build/*'
+        remote_path: '/www/wwwroot/default/'
+#    - name: 部署
+#      uses: JamesIves/github-pages-deploy-action@v4
+#      with:
+#        branch: gh-pages
+#        folder: build
